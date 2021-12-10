@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {
+  BrowserRouter,
+  Routes, // pre Version 6: "Switch"
+  Route,
+  Link
+} from 'react-router-dom';
 
-function App() {
+import Home from './components/home';
+import Post from './components/posts';
+import Profile from './components/profile';
+
+const App = () => {
+  // Note: I used the docs of reactrouter since with the code of the course
+  // it does not seem to work
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <BrowserRouter>
+      <header>
+        <Link to="/">Home</Link> -
+        <Link to="/posts">Posts</Link> -
+        <Link to={{
+          pathname: '/profile',
+          hash: '#francis',
+          search: '?true=enabled'
+        }}>Profile</Link>
+        <hr />
       </header>
-    </div>
+
+      {/* A <Routes> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/posts" element={<Post />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </BrowserRouter>
+
   );
 }
 
