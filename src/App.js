@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   BrowserRouter,
-  Routes, // pre Version 6: "Switch"
+  Switch, // in Version 6: "Routes"
   Route
 } from 'react-router-dom';
 
@@ -20,12 +20,20 @@ const App = () => {
 
       {/* A <Routes> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-      <Routes>
-        <Route path="/posts/:id" component={<PostItem />} />
-        <Route path="/posts" exact element={<Post />} />
-        <Route path="/profile" exact element={<Profile />} />
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <div className="container">
+        <Switch>
+          {/* <Redirect from="/profile" to="/"/> */}
+          <Route path="/posts/:id" component={PostItem} />
+          <Route path="/posts" component={Post} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/" exact component={Home} />
+
+          <Route render={() => (
+            <h3>Ooops page not found !!</h3>
+          )} />
+
+        </Switch>
+      </div>
     </BrowserRouter>
 
   );
