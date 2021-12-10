@@ -6,7 +6,11 @@ const Profile = (props) => {
     console.log(props)
     return (
         <>
-            Posts
+            <Link to={{
+                pathname: `${props.match.url}/posts`
+            }}>
+                posts of profile
+            </Link>
         </>
     );
 }
